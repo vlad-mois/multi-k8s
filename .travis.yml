@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t vlad-mois/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t vladmois/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true vlad-mois/react-test npm test
+  - docker run -e CI=true vladmois/react-test npm test
 
 after_success:
-  - docker build -t vlad-mois/multi-client ./client
-  - docker build -t vlad-mois/multi-nginx ./nginx
-  - docker build -t vlad-mois/multi-server ./server
-  - docker build -t vlad-mois/multi-worker ./worker
+  - docker build -t vladmois/multi-client ./client
+  - docker build -t vladmois/multi-nginx ./nginx
+  - docker build -t vladmois/multi-server ./server
+  - docker build -t vladmois/multi-worker ./worker
   # Log in to the docker CLI.
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push to the dockerhub.
-  - docker push vlad-mois/multi-client
-  - docker push vlad-mois/multi-nginx
-  - docker push vlad-mois/multi-server
-  - docker push vlad-mois/multi-worker
+  - docker push vladmois/multi-client
+  - docker push vladmois/multi-nginx
+  - docker push vladmois/multi-server
+  - docker push vladmois/multi-worker
